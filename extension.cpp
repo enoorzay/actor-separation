@@ -5,25 +5,26 @@
  *
  * This file takes a movie cast file and creates an Actorgraph from it.
  * It then takes a user input of 2 actor names, and finds the actors from
- * the graph. It allows the user to see different characteristics of that 
+ * the graph. It allows the user to see different characteristics of that
  * actor node.
  */
 
 
 #include "ActorGraph.hpp"
 using namespace std;
+
 	
 
 int main(int argc, char* argv[])
-{ 
+{
 
 	// check args
 	if(argc != 2){
-		cout << "Invalid number of arguments.\n" 
+		cout << "Invalid number of arguments.\n"
 		     << "Usage: ./extension <casting data file>";
 		return -1;
 
-	}	
+	}
 
 
 	ActorGraph mygraph = ActorGraph();
@@ -31,12 +32,12 @@ int main(int argc, char* argv[])
 	bool loaded;
 	cout << "Loading...\n";
 	loaded = mygraph.loadFromFile(argv[1], false, false);
-	
+
 	if (loaded)
 	{
 		cout << "Done!" << '\n';
 	}
-	else 
+	else
 	{
 		cout << "FAILURE;" << '\n';
 	}
@@ -52,12 +53,12 @@ int main(int argc, char* argv[])
 
 	// If user is reusing actors
 	bool reusing = false;
-	
+
 	// This is the main loop for handling user input
 	while (1)
 	{
 
-		// This block takes two actor names from user and finds their nodes 
+		// This block takes two actor names from user and finds their nodes
 		if (!reusing)
 		{
 			int run = 0;
@@ -121,18 +122,18 @@ int main(int argc, char* argv[])
 
 					run++;
 
-				}	
-			
+				}
+
 			}
 		}
 
 		// If both actors found then can operate on them
 		if (actor1 && actor2)
-		{	
-		
+		{
+
 
 			cout << "\nPlease make a selection: " << endl;
-			cout << "(F)ind shortest path to other actor, " 
+			cout << "(F)ind shortest path to other actor, "
 				 << "(A)verage distance to actor, "
 				 << "(L)ist all movies starred in, or "
 				 << "(E)xit." << endl;
@@ -152,18 +153,18 @@ int main(int argc, char* argv[])
 				case 'E':
 					cout << "Exiting." << endl;
 					return 1;
-				
+
 				// List movies case
 				case 'L':
 					cout << "Would you like to list the movies of \n"
 						 << "(1) " << actor1->getName() <<"\n(2) "
 						 << actor2->getName() << "\n(3) both: \n";
-					cin >> input; 
+					cin >> input;
 					if (input == 1)
 					{
 						cout << actor1->getName() << endl;
 						cout << actor1->listMovies() << endl;
-						break;	
+						break;
 					}
 					if (input == 2)
 					{
@@ -181,7 +182,7 @@ int main(int argc, char* argv[])
 
 					}
 
-				// Shortest path case, uses BFS 
+				// Shortest path case, uses BFS
 				case 'F':
 					cout << "Shortest path " << endl;
 					cout << mygraph.Breadthfirst(actor1->getName(), actor2->getName(), false);
@@ -234,8 +235,8 @@ int main(int argc, char* argv[])
 							 	total--;
 							}
 						}
-						 	
-						
+
+
 					}
 
 					double avg = (sum/total);
@@ -246,7 +247,7 @@ int main(int argc, char* argv[])
 
 
 			}
-			
+
 		}
 
 
@@ -269,12 +270,12 @@ int main(int argc, char* argv[])
 			{
 				reusing = true;
 			}
-			else 
+			else
 			{
 				reusing = false;
 			}
 		}
-			
+
 
 	}
 
