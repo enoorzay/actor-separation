@@ -7,6 +7,5 @@
 !refpathfinder
 !*.hpp
 !*.cpp
-!*.pdf
-!*.txt
 !*.tsv
+!*.md
